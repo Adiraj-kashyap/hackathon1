@@ -1,36 +1,150 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Dynamic Web Page</title>
-    <link rel="stylesheet" href="style.css"> 
+    <title>Campus Venue Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header><div>
-        <img src="pic.jpeg" alt="Profile Picture" id="header-image">
-        <h1>Welcome to My Web Page</h1>
-        <nav>
-            <ul>
-                <li id="child1"><a href="#" data-section="home">Home</a></li>
-                <li><a href="#" data-section="about">About</a></li>
-                <li><a href="#" data-section="services">Services</a></li>
-                <li><a href="#" data-section="contact">Contact</a></li>
-            </ul>
-        </nav>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Campus Venue Booking</div>
+                <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#booking">Booking</a></li>
+                    <li><a href="#venues">Venues</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main id="content">    </main>
+    <main id="main-content">
+        <div class="container">
+            <div class="inline-content">
+                <aside class="sidebar">
+                    <div class="card">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="#booking">Book a Venue</a></li>
+                            <li><a href="#venues">View All Venues</a></li>
+                            <li><a href="#faq">FAQs</a></li>
+                            <li><a href="#contact">Contact Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h2>Upcoming Events</h2>
+                        <ul id="upcoming-events">
+                            <!-- Dynamically populated by JavaScript -->
+                        </ul>
+                    </div>
+                </aside>
+                <div class="main-content">
+                    <section id="home" class="hero reveal">
+                        <h1>Welcome to the Campus Venue Booking System</h1>
+                        <p>Find and book venues for your college events with ease!</p>
+                        <a href="#booking" class="cta-button">Book a Venue Now</a>
+                    </section>
+
+                    <section id="features" class="features reveal">
+                        <h2>Our Features</h2>
+                        <div class="grid">
+                            <div class="feature card">
+                                <i class="fas fa-calendar-check"></i>
+                                <h3>Easy Booking</h3>
+                                <p>Select venues, dates, and time slots effortlessly.</p>
+                            </div>
+                            <div class="feature card">
+                                <i class="fas fa-filter"></i>
+                                <h3>Smart Filtering</h3>
+                                <p>Find the perfect venue by capacity, location, and availability.</p>
+                            </div>
+                            <div class="feature card">
+                                <i class="fas fa-history"></i>
+                                <h3>Booking History</h3>
+                                <p>Keep track of your approved and pending requests.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="about" class="reveal">
+                        <h2>About Us</h2>
+                        <p>The Campus Venue Booking System simplifies the process of reserving spaces for your events, meetings, and activities. Our platform connects students, faculty, and staff with the perfect venues across campus.</p>
+                    </section>
+
+                    <section id="venues" class="reveal">
+                        <h2>Popular Venues</h2>
+                        <div class="grid" id="venue-grid">
+                            <!-- Dynamically populated by JavaScript -->
+                        </div>
+                    </section>
+
+                    <section id="booking" class="reveal">
+                        <h2>Book a Venue</h2>
+                        <form id="booking-form">
+                            <label for="venue">Select Venue:</label>
+                            <select id="venue" name="venue" required>
+                                <option value="">Choose a venue</option>
+                                <!-- Dynamically populated by JavaScript -->
+                            </select>
+                            <label for="date">Date:</label>
+                            <input type="date" id="date" name="date" required>
+                            <label for="time">Time:</label>
+                            <input type="time" id="time" name="time" required>
+                            <label for="duration">Duration (hours):</label>
+                            <input type="number" id="duration" name="duration" min="1" max="8" required>
+                            <button type="submit">Submit Booking Request</button>
+                        </form>
+                    </section>
+
+                    <section id="contact" class="reveal">
+                        <h2>Contact Us</h2>
+                        <form id="contact-form">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="message">Message:</label>
+                            <textarea id="message" name="message" required></textarea>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <footer>
-        <p>&copy; 2024 My Website</p>
+        <div class="container">
+            <p>&copy; 2024 Campus Venue Booking System | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </div>
     </footer>
 
-    <script src="script.js"></script> 
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="toast-container"></div>
+
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script src="script.js"></script>
 </body>
 </html>

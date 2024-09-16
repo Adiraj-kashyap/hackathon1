@@ -1,147 +1,421 @@
-/* Problem Statement: Venue Booking System
-Your task is to build a Venue Booking System website for college students to request and reserve
-venues for their events. The system should allow students to book venues for specific dates and
-times, and submit their booking requests for admin approval.
-Features:
-
-
-1. Student Registration & Login:
-o Students should be able to register, log in, and manage their profiles.
-o Authentication using username and password.
-
-
-2. Venue Availability:
-o The website should display available venues and their current booking status
-(booked or available).
-o Users should be able to filter venues by capacity, location, and availability.
-
-
-3. Booking Requests:
-o Students can select a venue, specify the date, time slot, and event details, then
-submit a booking request.
-o Multiple time slots can be booked for a single day.
-
-
-4. Admin Approval Workflow:
-o Booking requests are sent to the admin panel for review.
-o Admins should be able to approve, reject, or request modifications to the bookings.
-
-
-5. Booking History:
-o Students can view their booking history (both approved and pending requests).
-
-
-6. Notifications:
-o Students receive notifications on the status of their booking (approved, rejected,
-pending).
-
-
-7. Admin Dashboard:
-o Admins should have a dashboard to manage booking requests, with the ability to
-view, approve, or reject them.
-o Admins can also see the list of upcoming events and venue schedules.
-
-
-*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Modern CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
+/* Custom Properties */
+:root {
+  --color-primary: #3a86ff;
+  --color-secondary: #ff006e;
+  --color-tertiary: #8338ec;
+  --color-background: #f8f9fa;
+  --color-text: #212529;
+  --color-text-light: #6c757d;
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --spacing-unit: 1rem;
+}
+
+/* Base Styles */
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin-bottom: var(--spacing-unit);
+  line-height: 1.2;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+
+p {
+  margin-bottom: var(--spacing-unit);
+  max-width: 70ch;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-unit);
+}
+
+/* Grid System */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-unit);
+}
+
+/* Header styles */
 header {
-    position: relative; /* Allows absolute positioning of child elements */
-    background: #333;
-    color: #fff;
-    padding: 2rem 0;
-    text-align: center;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
+  color: white;
+  padding: var(--spacing-unit) 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-header img#header-image {
-    position: absolute;
-    top: 1rem; /* Adjust as needed */
-    right: 1rem; /* Adjust as needed */
-    width: 100px; /* Adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Optional: makes the image round */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 1rem;
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
 }
 
 nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+#mobile-menu-toggle {
+    display: none;
+  }
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: var(--transition-smooth);
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
-    fo;
+nav ul li a:hover::after {
+  width: 100%;
 }
 
-
+/* Main content styles */
 main {
-    padding: 2rem;
+  margin-top: 80px;
+  padding: calc(var(--spacing-unit) * 2) 0;
 }
 
 section {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: #fff;
-    border: 1px solid #ddd;
+  margin-bottom: calc(var(--spacing-unit) * 4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: var(--transition-smooth);
 }
 
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-    position: fixed;
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Inline content layout */
+.inline-content {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(var(--spacing-unit) * 2);
+}
+
+.sidebar {
+  flex: 1;
+  position: sticky;
+  top: 100px;
+}
+
+.main-content {
+  flex: 3;
+}
+
+/* Form styles */
+form {
+  background: white;
+  border-radius: 12px;
+  padding: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: calc(var(--spacing-unit) / 2);
+  font-weight: bold;
+  color: var(--color-text);
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: var(--spacing-unit);
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.2);
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+button:hover {
+  background-color: #2a75e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+/* Card styles */
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: calc(var(--spacing-unit) * 2);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+  position: relative;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(58, 134, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: var(--transition-smooth);
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-unit);
+  color: var(--color-text);
+}
+
+.card p {
+  color: var(--color-text-light);
+}
+
+.card .btn {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.card .btn:hover {
+  background-color: #2a75e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar styles */
+#calendar-container {
+  background-color: white;
+  border-radius: 12px;
+  padding: var(--spacing-unit);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+#calendar table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#calendar th, #calendar td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #e9ecef;
+}
+
+#calendar th {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+#calendar td:hover {
+  background-color: #f1f3f5;
+  cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .inline-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
     width: 100%;
-    bottom: 0;
-}
+  }
 
-/* Home Section Styles */
-.image-container {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: var(--spacing-unit);
+  }
+
+  .nav-menu.active {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+  }
+
+  .nav-menu li {
+    margin: calc(var(--spacing-unit) / 2) 0;
+  }
+
+  #mobile-menu-toggle {
+    display: block;
+  }
+
+  .card {
+    padding: var(--spacing-unit);
+  }
 }
 
-.image-container img {
-    width: 19%; /* Adjust width to fit 3 images with space in between */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 0.5%; /* Add equal space between images */
+/* Utility classes */
+.text-center { text-align: center; }
+.mt-2 { margin-top: calc(var(--spacing-unit) * 2); }
+.mb-2 { margin-bottom: calc(var(--spacing-unit) * 2); }
+.p-2 { padding: calc(var(--spacing-unit) * 2); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    nav ul li {
-        display: block;
-        margin-bottom: 0.5rem;
-    }
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
 
-    .image-container {
-        flex-direction: column; /* Stack images vertically on small screens */
-    }
+/* Scroll-triggered animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: var(--transition-smooth);
+}
 
-    .image-container img {
-        width: 100%; /* Make images full width on small screens */
-        margin: 0.5rem 0; /* Add space between images vertically */
-    }
-    
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a75e6;
+}
+
+/* Accessibility improvements */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: white;
+  padding: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
 }

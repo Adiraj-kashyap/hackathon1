@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Venue - Campus Venue Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Campus Venue Booking</div>
+                <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html" class="active">Booking</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="auth.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <section class="hero reveal">
+                <h1>Book Your Perfect Venue</h1>
+                <p>Find and reserve the ideal space for your event with ease.</p>
+            </section>
+
+            <div class="inline-content">
+                <aside class="sidebar">
+                    <div class="card">
+                        <h2>Quick Links</h2>
+                        <ul>
+                            <li><a href="#venue-selection">Select Venue</a></li>
+                            <li><a href="#date-time">Choose Date & Time</a></li>
+                            <li><a href="#event-details">Event Details</a></li>
+                            <li><a href="#review-submit">Review & Submit</a></li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h2>Need Help?</h2>
+                        <p>Contact our support team for assistance with your booking.</p>
+                        <a href="contact.html" class="btn">Contact Support</a>
+                    </div>
+                </aside>
+
+                <div class="main-content">
+                    <section id="booking-form" class="reveal">
+                        <h2>Book a Venue</h2>
+                        <form id="venue-booking-form">
+                            <div id="venue-selection">
+                                <h3>1. Select Venue</h3>
+                                <label for="venue">Choose a venue:</label>
+                                <select id="venue" name="venue" required>
+                                    <option value="">Select a venue</option>
+                                    <!-- Options will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div id="date-time">
+                                <h3>2. Choose Date & Time</h3>
+                                <label for="date">Date:</label>
+                                <input type="date" id="date" name="date" required>
+                                
+                                <label for="time-slot">Time Slot:</label>
+                                <select id="time-slot" name="time-slot" required>
+                                    <option value="">Select a time slot</option>
+                                    <!-- Time slots will be populated dynamically -->
+                                </select>
+                            </div>
+
+                            <div id="event-details">
+                                <h3>3. Event Details</h3>
+                                <label for="event-type">Event Type:</label>
+                                <select id="event-type" name="event-type" required>
+                                    <option value="">Select event type</option>
+                                    <option value="meeting">Meeting</option>
+                                    <option value="seminar">Seminar</option>
+                                    <option value="workshop">Workshop</option>
+                                    <option value="conference">Conference</option>
+                                    <option value="other">Other</option>
+                                </select>
+
+                                <label for="attendees">Number of Attendees:</label>
+                                <input type="number" id="attendees" name="attendees" min="1" required>
+
+                                <label for="description">Event Description:</label>
+                                <textarea id="description" name="description" rows="4" required></textarea>
+                            </div>
+
+                            <div id="review-submit">
+                                <h3>4. Review & Submit</h3>
+                                <div id="booking-summary"></div>
+                                <button type="submit" class="btn-primary">Submit Booking Request</button>
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Campus Venue Booking System | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <div class="toast-container"></div>
+
+    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+</body>
+</html>
