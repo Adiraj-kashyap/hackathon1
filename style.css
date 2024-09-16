@@ -1,29 +1,95 @@
-<<<<<<< HEAD
-.files{
-    padding: 10em;
-    position: fixed;
-    display: block;
-    top: 1em;
-    left: 1em;
-    height: 3px;
-    background-color: aqua;
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
 
+header {
+    position: relative; /* Allows absolute positioning of child elements */
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
 }
-=======
-body{
-    flex-wrap:wrap;
-    background-color: teal;
+
+header img#header-image {
+    position: absolute;
+    top: 1rem; /* Adjust as needed */
+    right: 1rem; /* Adjust as needed */
+    width: 100px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: makes the image round */
 }
-div{
-    border: solid black 10px;
-    padding:5px;
-    width: 20px;
-    background-color:blue;
+
+nav ul {
+    list-style: none;
+    padding: 0;
 }
-div:nth-of-type(2n){
-    background-color: pink;
+
+nav ul li {
+    display: inline;
+    margin-right: 1rem;
 }
-div:nth-of-type(2n+1){
-    background-color: green;
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
->>>>>>> 6a476c8b514d196e42df475777e2dcd06bc49268
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Home Section Styles */
+.image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image-container img {
+    width: 19%; /* Adjust width to fit 3 images with space in between */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 0.5%; /* Add equal space between images */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    nav ul li {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .image-container {
+        flex-direction: column; /* Stack images vertically on small screens */
+    }
+
+    .image-container img {
+        width: 100%; /* Make images full width on small screens */
+        margin: 0.5rem 0; /* Add space between images vertically */
+    }
+}
