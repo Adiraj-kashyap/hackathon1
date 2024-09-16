@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Campus Venue Booking System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Campus Venue Booking</div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="booking.html">Book Venue</a></li>
+                    <li><a href="profile.html" class="active">My Profile</a></li>
+                    <li><a href="#" id="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <div class="container">
+            <h1>My Profile</h1>
+            <section id="user-info">
+                <h2>User Information</h2>
+                <p><strong>Name:</strong> <span id="user-name"></span></p>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <button id="edit-profile-btn" class="btn-primary">Edit Profile</button>
+            </section>
+
+            <section id="user-bookings">
+                <h2>My Bookings</h2>
+                <table id="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Venue</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookings-body"></tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Edit Profile</h2>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="edit-name">Name:</label>
+                    <input type="text" id="edit-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-email">Email:</label>
+                    <input type="email" id="edit-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-password">New Password (leave blank to keep current):</label>
+                    <input type="password" id="edit-password">
+                </div>
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userNameElement = document.getElementById('user-name');
+            const userEmailElement = document.getElementById('user-email');
+            const bookingsBody = document.getElementById('bookings-body');
+            const editProfileBtn = document.getElementById('edit-profile-btn');
+            const editProfileModal = document.getElementById('edit-profile-modal');
+            const editProfileForm = document.getElementById('edit-profile-form');
+            const closeModal = editProfileModal.querySelector('.close');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            // Load user information and bookings
+            loadUserInfo();
+            loadUserBookings();
+
+            // Edit profile button click handler
+            editProfileBtn.addEventListener('click', () => {
+                editProfileModal.style.display = 'block';
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', () => {
+                editProfileModal.style.display = 'none';
+            });
+
+            // Edit profile form submit handler
+            editProfileForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userData = {
+                    name: document.getElementById('edit-name').value,
+                    email: document.getElementById('edit-email').value,
+                    password: document.getElementById('edit-password').value
+                };
+
+                const success = await updateUserProfile(userData);
+                if (success) {
+                    editProfileModal.style.display = 'none';
+                    loadUserInfo();
+                    showToast('Profile updated successfully!');
+                } else {
+                    showToast('Failed to update profile. Please try again.');
+                }
+            });
+
+            // Logout button click handler
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('token');
+                window.location.href = 'index.html';
+            });
+
+            // Load user information function
+            async function loadUserInfo() {
+                const userInfo = await getUserInfo();
+                if (userInfo) {
+                    userNameElement.textContent = userInfo.name;
+                    userEmailElement.textContent = userInfo.email;
+                    document.getElementById('edit-name').value = userInfo.name;
+                    document.getElementById('edit-email').value = userInfo.email;
+                }
+            }
+
+            // Load user bookings function
+            async function loadUserBookings() {
+                const bookings = await getUserBookings();
+                bookingsBody.innerHTML = '';
+                bookings.forEach(booking => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${booking.venue_name}</td>
+                        <td>${booking.date}</td>
+                        <td>${booking.time}</td>
+                        <td>${booking.status}</td>
+                        <td>
+                            ${booking.status === 'pending' ? `
+                                <button class="btn-cancel" data-id="${booking.id}">Cancel</button>
+                            ` : ''}
+                        </td>
+                    `;
+                    bookingsBody.appendChild(row);
+                });
+
+                // Add event listeners for cancel buttons
+                document.querySelectorAll('.btn-cancel').forEach(btn => {
+                    btn.addEventListener('click', (e) => cancelBooking(e.target.dataset.id));
+                });
+            }
+
+            // Cancel booking function
+            async function cancelBooking(id) {
+                if (confirm('Are you sure you want to cancel this booking?')) {
+                    const success = await cancelUserBooking(id);
+                    if (success) {
+                        loadUserBookings();
+                        showToast('Booking cancelled successfully!');
+                    } else {
+                        showToast('Failed to cancel booking. Please try again.');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

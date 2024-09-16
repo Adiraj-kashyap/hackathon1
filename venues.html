@@ -79,6 +79,24 @@
                     <button type="submit">Submit Booking Request</button>
                 </form>
             </section>
+            <div class="search-container">
+                <input type="text" id="venue-search" placeholder="Search venues...">
+                <div class="filters">
+                    <select id="venue-type">
+                        <option value="">All Types</option>
+                        <option value="classroom">Classroom</option>
+                        <option value="auditorium">Auditorium</option>
+                        <!-- Add more options -->
+                    </select>
+                    <input type="number" id="min-capacity" placeholder="Min Capacity">
+                    <!-- Add more filters -->
+                </div>
+            </div>
+            <div class="venue-reviews">
+                <h3>User Reviews</h3>
+                <div id="review-list"></div>
+                <button id="add-review-btn">Add Review</button>
+            </div>
         </div>
     </main>
 

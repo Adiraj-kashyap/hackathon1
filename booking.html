@@ -59,52 +59,15 @@
                 <div class="main-content">
                     <section id="booking-form" class="reveal">
                         <h2>Book a Venue</h2>
-                        <form id="venue-booking-form">
-                            <div id="venue-selection">
-                                <h3>1. Select Venue</h3>
-                                <label for="venue">Choose a venue:</label>
-                                <select id="venue" name="venue" required>
-                                    <option value="">Select a venue</option>
-                                    <!-- Options will be populated dynamically -->
-                                </select>
-                            </div>
-
-                            <div id="date-time">
-                                <h3>2. Choose Date & Time</h3>
-                                <label for="date">Date:</label>
-                                <input type="date" id="date" name="date" required>
-                                
-                                <label for="time-slot">Time Slot:</label>
-                                <select id="time-slot" name="time-slot" required>
-                                    <option value="">Select a time slot</option>
-                                    <!-- Time slots will be populated dynamically -->
-                                </select>
-                            </div>
-
-                            <div id="event-details">
-                                <h3>3. Event Details</h3>
-                                <label for="event-type">Event Type:</label>
-                                <select id="event-type" name="event-type" required>
-                                    <option value="">Select event type</option>
-                                    <option value="meeting">Meeting</option>
-                                    <option value="seminar">Seminar</option>
-                                    <option value="workshop">Workshop</option>
-                                    <option value="conference">Conference</option>
-                                    <option value="other">Other</option>
-                                </select>
-
-                                <label for="attendees">Number of Attendees:</label>
-                                <input type="number" id="attendees" name="attendees" min="1" required>
-
-                                <label for="description">Event Description:</label>
-                                <textarea id="description" name="description" rows="4" required></textarea>
-                            </div>
-
-                            <div id="review-submit">
-                                <h3>4. Review & Submit</h3>
-                                <div id="booking-summary"></div>
-                                <button type="submit" class="btn-primary">Submit Booking Request</button>
-                            </div>
+                        <form id="booking-form">
+                            <select id="venue" name="venue_id" required>
+                                <option value="">Select a venue</option>
+                            </select>
+                            <input type="date" id="date" name="date" required>
+                            <input type="time" id="start_time" name="start_time" required>
+                            <input type="time" id="end_time" name="end_time" required>
+                            <input type="text" id="event_name" name="event_name" required placeholder="Event Name">
+                            <button type="submit">Book Venue</button>
                         </form>
                     </section>
                 </div>
@@ -131,5 +94,41 @@
     <button id="dark-mode-toggle" aria-label="Toggle dark mode">
         <i class="fas fa-moon"></i>
     </button>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const bookingForm = document.getElementById('booking-form');
+        const venueSelect = document.getElementById('venue');
+
+        // Populate venues
+        try {
+            const venues = await getVenues();
+            venues.forEach(venue => {
+                const option = document.createElement('option');
+                option.value = venue.id;
+                option.textContent = venue.name;
+                venueSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error fetching venues:', error);
+        }
+
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(bookingForm);
+            const bookingData = Object.fromEntries(formData);
+            
+            try {
+                const result = await createBooking(bookingData);
+                if (result) {
+                    showToast('Booking created successfully!');
+                    bookingForm.reset();
+                }
+            } catch (error) {
+                console.error('Booking error:', error);
+            }
+        });
+    });
+    </script>
 </body>
 </html>
