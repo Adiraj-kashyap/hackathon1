@@ -1,4 +1,53 @@
-/* General Styles */
+/* Problem Statement: Venue Booking System
+Your task is to build a Venue Booking System website for college students to request and reserve
+venues for their events. The system should allow students to book venues for specific dates and
+times, and submit their booking requests for admin approval.
+Features:
+
+
+1. Student Registration & Login:
+o Students should be able to register, log in, and manage their profiles.
+o Authentication using username and password.
+
+
+2. Venue Availability:
+o The website should display available venues and their current booking status
+(booked or available).
+o Users should be able to filter venues by capacity, location, and availability.
+
+
+3. Booking Requests:
+o Students can select a venue, specify the date, time slot, and event details, then
+submit a booking request.
+o Multiple time slots can be booked for a single day.
+
+
+4. Admin Approval Workflow:
+o Booking requests are sent to the admin panel for review.
+o Admins should be able to approve, reject, or request modifications to the bookings.
+
+
+5. Booking History:
+o Students can view their booking history (both approved and pending requests).
+
+
+6. Notifications:
+o Students receive notifications on the status of their booking (approved, rejected,
+pending).
+
+
+7. Admin Dashboard:
+o Admins should have a dashboard to manage booking requests, with the ability to
+view, approve, or reject them.
+o Admins can also see the list of upcoming events and venue schedules.
+
+
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -10,7 +59,7 @@ header {
     position: relative; /* Allows absolute positioning of child elements */
     background: #333;
     color: #fff;
-    padding: 1rem 0;
+    padding: 2rem 0;
     text-align: center;
 }
 
@@ -41,7 +90,9 @@ nav ul li a {
 
 nav ul li a:hover {
     text-decoration: underline;
+    fo;
 }
+
 
 main {
     padding: 2rem;
@@ -92,4 +143,5 @@ footer {
         width: 100%; /* Make images full width on small screens */
         margin: 0.5rem 0; /* Add space between images vertically */
     }
+    
 }
