@@ -27,13 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setupToastNotifications();
 
     // Calendar functionality
-    setupCalendar();
+    if (document.getElementById('calendar-container')) {
+        setupCalendar();
+    }
 
     // Authentication handling
-    setupAuth();
+    if (document.getElementById('login') || document.getElementById('register')) {
+        setupAuth();
+    }
 
     // Hamburger menu functionality
     setupHamburgerMenu();
+
+    // Setup venue cards
+    setupVenueCards();
 });
 
 function setupForms() {
@@ -369,3 +376,95 @@ function setupHamburgerMenu() {
         });
     }
 }
+
+function setupVenueCards() {
+    const venueCards = document.querySelectorAll('.venue-card');
+    venueCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const venueName = card.querySelector('h3').textContent;
+            const venueDetails = card.querySelector('.venue-details').innerHTML;
+            showModal(venueName, venueDetails);
+        });
+    });
+}
+
+function showModal(title, content) {
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+
+    modalTitle.textContent = title;
+    modalBody.innerHTML = content;
+    modal.style.display = 'block';
+
+    const closeBtn = modal.querySelector('.close');
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarDays = document.getElementById('calendar-days');
+    const calendarWeekdays = document.getElementById('calendar-weekdays');
+    const currentMonthElement = document.getElementById('current-month');
+    const prevMonthButton = document.getElementById('prev-month');
+    const nextMonthButton = document.getElementById('next-month');
+
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let currentDate = new Date();
+
+    function renderWeekdays() {
+        calendarWeekdays.innerHTML = weekdays.map(day => `<div class="calendar-weekday">${day}</div>`).join('');
+    }
+
+    function renderCalendar(year, month) {
+        const firstDay = new Date(year, month,  1);
+        const lastDay = new Date(year, month + 1, 0);
+        const daysInMonth = lastDay.getDate();
+        const startingDay = firstDay.getDay();
+
+        currentMonthElement.textContent = firstDay.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        calendarDays.innerHTML = '';
+
+        for (let i = 0; i < startingDay; i++) {
+            calendarDays.appendChild(document.createElement('div'));
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.classList.add('calendar-day');
+            dayElement.textContent = day;
+
+            if (day < new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) {
+                dayElement.classList.add('disabled');
+            } else {
+                dayElement.addEventListener('click', () => {
+                    document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('active'));
+                    dayElement.classList.add('active');
+                });
+            }
+
+            calendarDays.appendChild(dayElement);
+        }
+    }
+
+    renderWeekdays();
+    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+    prevMonthButton.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    });
+
+    nextMonthButton.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    });
+});

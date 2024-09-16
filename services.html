@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - Campus Venue Booking System</title>
+    <title>Book Venue - Campus Venue Booking System</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -19,8 +20,8 @@
                 <ul class="nav-menu">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="services.html" class="active">Services</a></li>
-                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html" class="active">Booking</a></li>
                     <li><a href="venues.html">Venues</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="faq.html">FAQ</a></li>
@@ -30,68 +31,53 @@
         </div>
     </header>
 
-    <main id="main-content">
+    <main>
         <div class="container">
-            <section id="services" class="reveal">
-                <h1>Our Services</h1>
-                
-                <div class="grid">
-                    <div class="service card">
-                        <i class="fas fa-building fa-3x"></i>
-                        <h2>Venue Rental</h2>
-                        <p>We offer a variety of spaces for your events, from intimate gatherings to large celebrations.</p>
+            <h1>Our Services</h1>
+            <section class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
                     </div>
-                    
-                    <div class="service card">
-                        <i class="fas fa-utensils fa-3x"></i>
-                        <h2>Catering</h2>
-                        <p>Our in-house catering team provides delicious menu options for any occasion.</p>
+                    <div class="service-content">
+                        <h2 class="service-title">Venue Booking</h2>
+                        <p class="service-description">Book various campus venues for your events with ease.</p>
                     </div>
-                    
-                    <div class="service card">
-                        <i class="fas fa-calendar-check fa-3x"></i>
-                        <h2>Event Planning</h2>
-                        <p>Let our experienced event planners help you create the perfect event from start to finish.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2 class="service-title">Event Planning</h2>
+                        <p class="service-description">Get assistance in planning your campus events.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="service-content">
+                        <h2 class="service-title">Capacity Management</h2>
+                        <p class="service-description">Efficiently manage venue capacities for your events.</p>
                     </div>
                 </div>
             </section>
-            
-            <section id="availability" class="reveal">
-                <h2>Venue Availability Calendar</h2>
-                <div id="calendar-container">
-                    <div id="calendar-controls">
-                        <button id="prev-month" aria-label="Previous month">&lt;</button>
-                        <span id="current-month-year"></span>
-                        <button id="next-month" aria-label="Next month">&gt;</button>
-                    </div>
-                    <div id="calendar">
-                        <!-- Calendar will be dynamically generated here -->
-                    </div>
+            <section class="calendar-container">
+                <h2>Availability Calendar</h2>
+                <div class="calendar-header">
+                    <button id="prev-month" class="calendar-nav">&lt;</button>
+                    <h3 id="current-month"></h3>
+                    <button id="next-month" class="calendar-nav">&gt;</button>
                 </div>
+                <div id="calendar-weekdays" class="calendar-grid"></div>
+                <div id="calendar-days" class="calendar-grid"></div>
             </section>
         </div>
     </main>
-
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Campus Venue Booking System | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
-        </div>
+        <p>&copy; 2024 Campus Venue Booking System</p>
     </footer>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modal-title"></h2>
-            <div id="modal-body"></div>
-        </div>
-    </div>
-
-    <div class="toast-container"></div>
-
-    <button id="dark-mode-toggle" aria-label="Toggle dark mode">
-        <i class="fas fa-moon"></i>
-    </button>
-
-    <script src="script.js"></script>
+    
 </body>
 </html>

@@ -17,14 +17,14 @@
                     <i class="fas fa-bars"></i>
                 </button>
                 <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#booking">Booking</a></li>
-                    <li><a href="#venues">Venues</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#login">Login</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html">Booking</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="auth.html">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,9 +45,22 @@
                     </div>
                     <div class="card">
                         <h2>Upcoming Events</h2>
-                        <ul id="upcoming-events">
-                            <!-- Dynamically populated by JavaScript -->
-                        </ul>
+                        <div class="upcoming-event">
+                            <img src="techno-vit.png" alt="Tehno VIT">
+                            <h3></h3>
+                            <p>Date: Sept 19, 2024</p>
+                            <p>Time: 10:00 AM - 6:00 PM</p>
+                            <p>Venue: All Campus</p>
+                            <p>Booking starts: Sept 15, 2024</p>
+                        </div>
+                        <div class="upcoming-event">
+                            <img src="vibrance.jpg" alt="Vibrance">
+                            <h3>Vibrace</h3>
+                            <p>Date: Soon...</p>
+                            <p>Time: 5:00 PM - 11:00 PM</p>
+                            <p>Venue: Outdoor</p>
+                            <p>Booking starts: Soon....</p>
+                        </div>
                     </div>
                 </aside>
                 <div class="main-content">
@@ -56,7 +69,7 @@
                         <p>Find and book venues for your college events with ease!</p>
                         <a href="#booking" class="cta-button">Book a Venue Now</a>
                     </section>
-
+                    
                     <section id="features" class="features reveal">
                         <h2>Our Features</h2>
                         <div class="grid">
@@ -85,8 +98,61 @@
 
                     <section id="venues" class="reveal">
                         <h2>Popular Venues</h2>
-                        <div class="grid" id="venue-grid">
-                            <!-- Dynamically populated by JavaScript -->
+                        <div class="venue-grid">
+                            <div class="venue-card" data-venue="auditorium">
+                                <h3>MG Auditorium</h3>
+                                <div class="venue-details">
+                                    <img src="confrence.jpeg" alt="MG Auditorium">
+                                    <p>Capacity: 1000 people</p>
+                                    <p>Features: Stage, AV equipment, Seating</p>
+                                    <p>Location: Central Campus</p>
+                                </div>
+                            </div>
+                            <div class="venue-card" data-venue="conference-hall">
+                                <h3>Netaji Auditorium</h3>
+                                <div class="venue-details">
+                                    <img src="netaji.jpg" alt="Conference Hall">
+                                    <p>Capacity: 500 people</p>
+                                    <p>Features: Projector, Seating, Stage</p>
+                                    <p>Location: AB1 7th floor</p>
+                                </div>
+                            </div>
+                            <div class="venue-card" data-venue="outdoor-amphitheater">
+                                <h3>Outdoor Amphitheater</h3>
+                                <div class="venue-details">
+                                    <img src="Amphitheatre.jpg" alt="Outdoor Amphitheater">
+                                    <p>Capacity: 100 people</p>
+                                    <p>Features: Open-air seating, Stage</p>
+                                    <p>Location: AB1 Ground floor</p>
+                                </div>
+                            </div>
+                            <div class="venue-card" data-venue="Performances">
+                                <h3> M.G.R. Statue</h3>
+                                <div class="venue-details">
+                                    <img src="MGR statue.jpg" alt="Performances">
+                                    <p>Capacity: 150 people</p>
+                                    <p>Features: Standing shows, performances</p>
+                                    <p>Location: Central Campus</p>
+                                </div>
+                            </div>
+                            <div class="venue-card" data-venue="multipurpose">
+                                <h3>Amphitheater</h3>
+                                <div class="venue-details">
+                                    <img src="ampi.jpeg" alt="Multipurpose outdoor-amphitheater">
+                                    <p>Capacity: 100 people</p>
+                                    <p>Features: Flexible layout, AV equipment</p>
+                                    <p>Location: Behind Library</p>
+                                </div>
+                            </div>
+                            <div class="venue-card" data-venue="sports-arena">
+                                <h3>Sports Arena</h3>
+                                <div class="venue-details">
+                                    <img src="sports.jpeg" alt="Sports Arena">
+                                    <p>Capacity: 100 people</p>
+                                    <p>Features: Outdoor court, Bleachers</p>
+                                    <p>Location: Athletics Complex</p>
+                                </div>
+                            </div>
                         </div>
                     </section>
 

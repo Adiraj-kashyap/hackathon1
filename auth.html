@@ -3,126 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login/Register - Campus Venue Booking System</title>
+    <title>Book Venue - Campus Venue Booking System</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, var(--color-primary), var(--color-tertiary));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: var(--font-main);
-        }
-        .auth-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            width: 400px;
-            max-width: 100%;
-            animation: fadeIn 0.5s ease-out;
-        }
-        .auth-header {
-            background: var(--color-primary);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .auth-tabs {
-            display: flex;
-        }
-        .auth-tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px;
-            background: #f1f1f1;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .auth-tab.active {
-            background: white;
-            font-weight: bold;
-        }
-        .auth-form {
-            padding: 20px;
-        }
-        .auth-form h2 {
-            margin-bottom: 20px;
-            color: var(--color-primary);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--color-text);
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        .form-group input:focus {
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
-        }
-        .auth-form button {
-            width: 100%;
-            padding: 12px;
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        .auth-form button:hover {
-            background: #2a75e6;
-        }
-        .forgot-password {
-            text-align: right;
-            margin-top: 10px;
-        }
-        .forgot-password a {
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-        .social-login {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .social-login button {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            margin: 0 5px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .social-login button:hover {
-            transform: scale(1.1);
-        }
-        .google { background: #DB4437; color: white; }
-        .facebook { background: #4267B2; color: white; }
-        .twitter { background: #1DA1F2; color: white; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Campus Venue Booking</div>
+                <button id="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="booking.html" class="active">Booking</a></li>
+                    <li><a href="venues.html">Venues</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="auth.html">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <div class="auth-container">
         <div class="auth-header">Campus Venue Booking System</div>
         <div class="auth-tabs">
@@ -152,10 +60,10 @@
             </div>
         </div>
         <div class="auth-form" id="register-form" style="display: none;">
-            <h2>Create Account</h2>
+            <h2>Create an Account</h2>
             <form id="register">
                 <div class="form-group">
-                    <label for="register-name">Full Name</label>
+                    <label for="register-name">Name</label>
                     <input type="text" id="register-name" name="name" required>
                 </div>
                 <div class="form-group">
@@ -170,7 +78,7 @@
                     <label for="register-confirm-password">Confirm Password</label>
                     <input type="password" id="register-confirm-password" name="confirm-password" required>
                 </div>
-                <button type="submit">Register</button>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
     </div>
@@ -238,6 +146,5 @@
             }, 3000);
         }
     </script>
-    
 </body>
 </html>
